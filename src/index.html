@@ -10,42 +10,106 @@
 </head>
 <body>
  <!-- Шапка сайта -->
- <header>
- <a href="/">Логотип или название сайта</a>
- <!-- Главное меню навигации -->
- <nav>
- <ul>
- <li><a href="index.html">Главная</a></li>
- <li><a href="about.html">О нас</a></li>
- <li><a href="contacts.html">Контакты</a></li>
- </ul>
- </nav>
+ <header class="site-header">
+  <div class="container">
+   <div class="site-header__content">
+    <a class="site-header__brand" href="/">Логотип или название сайта</a>
+    <!-- Главное меню навигации -->
+    <nav class="site-nav" aria-label="Основная навигация">
+     <ul class="site-nav__list">
+      <li class="site-nav__item"><a class="site-nav__link site-nav__link--active" href="index.html">Главная</a></li>
+      <li class="site-nav__item"><a class="site-nav__link" href="about.html">О нас</a></li>
+      <li class="site-nav__item"><a class="site-nav__link" href="contacts.html">Контакты</a></li>
+     </ul>
+    </nav>
+    <button class="theme-toggle btn btn--secondary" type="button" aria-pressed="false">🌙</button>
+   </div>
+  </div>
  </header>
  <!-- Уникальное основное содержимое страницы -->
- <main>
- <h1>Добро пожаловать на наш сайт!</h1>
- <!-- Секция 1 с якорем -->
- <section id="services">
- <h2>Наши услуги</h2>
- <p>Описание предоставляемых услуг...</p>
- <a href="#contacts">Связаться с нами</a> <!-- Якорная ссылка внутри страницы -->
- </section>
- <!-- Секция 2 с якорем -->
- <section id="portfolio">
- <h2>Портфолио</h2>
- <p>Примеры наших работ...</p>
- </section>
- <!-- Секция 3 с якорем -->
- <section id="contacts">
- <h2>Контактная информация</h2>
- <p>Наши контакты...</p>
- <a href="contacts.html">Подробнее</a> <!-- Ссылка на отдельную страницу -->
- </section>
+ <main class="container">
+  <!-- Герой-секция -->
+  <section class="hero">
+   <h1 class="hero__title">Добро пожаловать на наш сайт!</h1>
+   <p class="hero__text">Мы создаем современные веб-решения для вашего бизнеса</p>
+   <a class="btn btn--cta" href="#services">Узнать больше</a>
+  </section>
+
+  <!-- Секция 1 с якорем -->
+  <section class="section" id="services">
+   <h2 class="section__title">Наши услуги</h2>
+   <p>Описание предоставляемых услуг...</p>
+   <a class="btn btn--primary" href="#contacts">Связаться с нами</a> <!-- Якорная ссылка внутри страницы -->
+  </section>
+  
+  <!-- Секция 2 с якорем -->
+  <section class="section" id="portfolio">
+   <h2 class="section__title">Портфолио</h2>
+   <p>Примеры наших работ...</p>
+   
+   <!-- Responsive изображение с srcset -->
+   <div class="card">
+    <img 
+     src="https://images.kinorium.com/movie/shot/1442930/w1500_48508328.jpg" 
+     srcset="https://images.kinorium.com/movie/shot/1442930/w1500_48508328.jpg 1500w"
+     sizes="(max-width: 700px) 92vw, (max-width: 1200px) 640px, 960px"
+     alt="Пример проекта: веб-приложение"
+     width="640" 
+     height="360"
+     loading="lazy"
+     class="card__img">
+    <div class="card__content">
+     <h3 class="card__title">Веб-приложение</h3>
+     <p class="card__text">Современное веб-приложение с адаптивным дизайном</p>
+     <a href="#" class="card__link">Подробнее</a>
+    </div>
+   </div>
+   
+   <!-- Видео с aspect-ratio -->
+   <div class="media">
+    <iframe
+     src="https://vkvideo.ru/video_ext.php?oid=-145643494&id=456247448&hash=e862ceaa90ccb46e"
+     title="Видео о проекте"
+     allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
+     allowfullscreen="1"
+     loading="lazy">
+    </iframe>
+   </div>
+  </section>
+  
+  <!-- Секция 3 с якорем -->
+  <section class="section" id="contacts">
+   <h2 class="section__title">Контактная информация</h2>
+   <p>Наши контакты...</p>
+   <a class="btn btn--secondary" href="contacts.html">Подробнее</a> <!-- Ссылка на отдельную страницу -->
+  </section>
  </main>
  <!-- Подвал сайта -->
  <footer>
  <p>&copy; 2023 Название вашего сайта. Все права защищены.</p>
  <p>Телефон: +7 (123) 456-78-90</p>
  </footer>
+ 
+ <script>
+  // Переключатель темы
+  const KEY = 'theme';
+  const btn = document.querySelector('.theme-toggle');
+  const prefersDark = matchMedia('(prefers-color-scheme: dark)').matches;
+  
+  // Автовыбор: системная тема или сохранённый выбор пользователя
+  if (localStorage.getItem(KEY) === 'dark' || (!localStorage.getItem(KEY) && prefersDark)) {
+   document.body.classList.add('theme-dark');
+   btn?.setAttribute('aria-pressed', 'true');
+   btn.textContent = '☀️';
+  }
+  
+  // Переключение по кнопке с сохранением в localStorage
+  btn?.addEventListener('click', () => {
+   const isDark = document.body.classList.toggle('theme-dark');
+   btn.setAttribute('aria-pressed', String(isDark));
+   btn.textContent = isDark ? '☀️' : '🌙';
+   localStorage.setItem(KEY, isDark ? 'dark' : 'light');
+  });
+ </script>
 </body>
 </html>

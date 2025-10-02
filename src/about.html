@@ -10,38 +10,73 @@
 </head>
 <body>
  <!-- Шапка сайта -->
- <header>
- <a href="/">Логотип или название сайта</a>
- <!-- Главное меню навигации -->
- <nav>
- <ul>
- <li><a href="index.html">Главная</a></li>
- <li><a href="about.html">О нас</a></li>
- <li><a href="contacts.html">Контакты</a></li>
- </ul>
- </nav>
+ <header class="site-header">
+  <div class="container">
+   <div class="site-header__content">
+    <a class="site-header__brand" href="/">Логотип или название сайта</a>
+    <!-- Главное меню навигации -->
+    <nav class="site-nav" aria-label="Основная навигация">
+     <ul class="site-nav__list">
+      <li class="site-nav__item"><a class="site-nav__link" href="index.html">Главная</a></li>
+      <li class="site-nav__item"><a class="site-nav__link site-nav__link--active" href="about.html">О нас</a></li>
+      <li class="site-nav__item"><a class="site-nav__link" href="contacts.html">Контакты</a></li>
+     </ul>
+    </nav>
+    <button class="theme-toggle btn btn--secondary" type="button" aria-pressed="false">🌙</button>
+   </div>
+  </div>
  </header>
  <!-- Уникальное основное содержимое страницы -->
- <main>
- <!-- Простые "хлебные крошки" -->
- <nav aria-label="Хлебные крошки">
- <a href="index.html">Главная</a> →
- <span>О нас</span>
- </nav>
- <h1>О нашей компании</h1>
- <section>
- <h2>Наша история</h2>
- <p>Текст о том, как все начиналось...</p>
- </section>
- <section>
- <h2>Наша команда</h2>
- <p>Текст о команде...</p>
- </section>
+ <main class="container">
+  <!-- Простые "хлебные крошки" -->
+  <nav class="breadcrumbs" aria-label="Хлебные крошки">
+   <ol class="breadcrumbs__list">
+    <li class="breadcrumbs__item">
+     <a class="breadcrumbs__link" href="index.html">Главная</a>
+     <span class="breadcrumbs__separator">→</span>
+    </li>
+    <li class="breadcrumbs__item">
+     <span class="breadcrumbs__current">О нас</span>
+    </li>
+   </ol>
+  </nav>
+  
+  <h1>О нашей компании</h1>
+  <section class="section">
+   <h2 class="section__title">Наша история</h2>
+   <p>Текст о том, как все начиналось...</p>
+  </section>
+  <section class="section">
+   <h2 class="section__title">Наша команда</h2>
+   <p>Текст о команде...</p>
+  </section>
  </main>
  <!-- Подвал сайта -->
  <footer>
  <p>&copy; 2023 Название вашего сайта. Все права защищены.</p>
  <p>Телефон: +7 (123) 456-78-90</p>
  </footer>
+ 
+ <script>
+  // Переключатель темы
+  const KEY = 'theme';
+  const btn = document.querySelector('.theme-toggle');
+  const prefersDark = matchMedia('(prefers-color-scheme: dark)').matches;
+  
+  // Автовыбор: системная тема или сохранённый выбор пользователя
+  if (localStorage.getItem(KEY) === 'dark' || (!localStorage.getItem(KEY) && prefersDark)) {
+   document.body.classList.add('theme-dark');
+   btn?.setAttribute('aria-pressed', 'true');
+   btn.textContent = '☀️';
+  }
+  
+  // Переключение по кнопке с сохранением в localStorage
+  btn?.addEventListener('click', () => {
+   const isDark = document.body.classList.toggle('theme-dark');
+   btn.setAttribute('aria-pressed', String(isDark));
+   btn.textContent = isDark ? '☀️' : '🌙';
+   localStorage.setItem(KEY, isDark ? 'dark' : 'light');
+  });
+ </script>
 </body>
 </html>
