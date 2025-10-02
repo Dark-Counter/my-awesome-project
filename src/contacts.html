@@ -10,42 +10,55 @@
 </head>
 <body>
  <!-- Шапка сайта -->
- <header>
- <a href="/">Логотип или название сайта</a>
- <!-- Главное меню навигации -->
- <nav>
- <ul>
- <li><a href="index.html">Главная</a></li>
- <li><a href="about.html">О нас</a></li>
- <li><a href="contacts.html">Контакты</a></li>
- </ul>
- </nav>
+ <header class="site-header">
+  <div class="container">
+   <div class="site-header__content">
+    <a class="site-header__brand" href="/">Логотип или название сайта</a>
+    <!-- Главное меню навигации -->
+    <nav class="site-nav" aria-label="Основная навигация">
+     <ul class="site-nav__list">
+      <li class="site-nav__item"><a class="site-nav__link" href="index.html">Главная</a></li>
+      <li class="site-nav__item"><a class="site-nav__link" href="about.html">О нас</a></li>
+      <li class="site-nav__item"><a class="site-nav__link site-nav__link--active" href="contacts.html">Контакты</a></li>
+     </ul>
+    </nav>
+    <button class="theme-toggle btn btn--secondary" type="button" aria-pressed="false">🌙</button>
+   </div>
+  </div>
  </header>
  <!-- Уникальное основное содержимое страницы -->
- <main>
- <!-- Простые "хлебные крошки" -->
- <nav aria-label="Хлебные крошки">
- <a href="index.html">Главная</a> →
- <span>Контакты</span>
- </nav>
- <h1>Контакты</h1>
- <section>
- <h2>Свяжитесь с нами</h2>
- <p>Мы всегда рады ответить на ваши вопросы и помочь с выбором услуг.</p>
- <button id="openDialog" type="button">Написать нам</button>
- </section>
- <section>
- <h2>Контактная информация</h2>
- <p>Телефон: +7 (123) 456-78-90</p>
- <p>Email: info@example.com</p>
- <p>Адрес: г. Москва, ул. Примерная, д. 123</p>
- </section>
- <section>
- <h2>Время работы</h2>
- <p>Понедельник - Пятница: 9:00 - 18:00</p>
- <p>Суббота: 10:00 - 16:00</p>
- <p>Воскресенье: выходной</p>
- </section>
+ <main class="container">
+  <!-- Простые "хлебные крошки" -->
+  <nav class="breadcrumbs" aria-label="Хлебные крошки">
+   <ol class="breadcrumbs__list">
+    <li class="breadcrumbs__item">
+     <a class="breadcrumbs__link" href="index.html">Главная</a>
+     <span class="breadcrumbs__separator">→</span>
+    </li>
+    <li class="breadcrumbs__item">
+     <span class="breadcrumbs__current">Контакты</span>
+    </li>
+   </ol>
+  </nav>
+  
+  <h1>Контакты</h1>
+  <section class="section">
+   <h2 class="section__title">Свяжитесь с нами</h2>
+   <p>Мы всегда рады ответить на ваши вопросы и помочь с выбором услуг.</p>
+   <button id="openDialog" class="btn btn--cta" type="button">Написать нам</button>
+  </section>
+  <section class="section">
+   <h2 class="section__title">Контактная информация</h2>
+   <p>Телефон: +7 (123) 456-78-90</p>
+   <p>Email: info@example.com</p>
+   <p>Адрес: г. Москва, ул. Примерная, д. 123</p>
+  </section>
+  <section class="section">
+   <h2 class="section__title">Время работы</h2>
+   <p>Понедельник - Пятница: 9:00 - 18:00</p>
+   <p>Суббота: 10:00 - 16:00</p>
+   <p>Воскресенье: выходной</p>
+  </section>
  </main>
  <!-- Подвал сайта -->
  <footer>
@@ -54,42 +67,76 @@
  </footer>
 
  <!-- Модальное окно с формой обратной связи -->
- <dialog id="contactDialog" aria-labelledby="dialogTitle">
-  <h2 id="dialogTitle">Обратная связь</h2>
-  <form id="contactForm" method="dialog" novalidate>
-   <label for="name">Имя</label>
-   <input id="name" name="name" type="text" required minlength="2" autocomplete="given-name">
+ <dialog id="contactDialog" class="modal" aria-labelledby="dialogTitle">
+  <h2 id="dialogTitle" class="modal__title">Обратная связь</h2>
+  <form id="contactForm" class="form" method="dialog" novalidate>
+   <div class="form__field">
+    <label class="form__label" for="name">Имя</label>
+    <input class="form__input" id="name" name="name" type="text" required minlength="2" autocomplete="given-name">
+   </div>
    
-   <label for="email">E-mail</label>
-   <input id="email" name="email" type="email" required autocomplete="email">
+   <div class="form__field">
+    <label class="form__label" for="email">E-mail</label>
+    <input class="form__input" id="email" name="email" type="email" required autocomplete="email">
+   </div>
    
-   <label for="phone">Телефон</label>
-   <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" 
-          aria-describedby="phoneHelp" placeholder="+7 (___) ___-__-__" 
-          required pattern="^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$">
-   <small id="phoneHelp">Формат: +7 (900) 000-00-00</small>
+   <div class="form__field">
+    <label class="form__label" for="phone">Телефон</label>
+    <input class="form__input" id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" 
+           aria-describedby="phoneHelp" placeholder="+7 (___) ___-__-__" 
+           required pattern="^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$">
+    <small id="phoneHelp" class="form__help">Формат: +7 (900) 000-00-00</small>
+   </div>
    
-   <label for="date">Дата</label>
-   <input id="date" name="date" type="date">
+   <div class="form__field">
+    <label class="form__label" for="date">Дата</label>
+    <input class="form__input" id="date" name="date" type="date">
+   </div>
    
-   <label for="topic">Тема</label>
-   <select id="topic" name="topic" required>
-    <option value="">Выберите тему</option>
-    <option value="question">Вопрос</option>
-    <option value="order">Заказ</option>
-    <option value="other">Другое</option>
-   </select>
+   <div class="form__field">
+    <label class="form__label" for="topic">Тема</label>
+    <select class="form__select" id="topic" name="topic" required>
+     <option value="">Выберите тему</option>
+     <option value="question">Вопрос</option>
+     <option value="order">Заказ</option>
+     <option value="other">Другое</option>
+    </select>
+   </div>
    
-   <label for="message">Сообщение</label>
-   <textarea id="message" name="message" rows="4" required></textarea>
+   <div class="form__field">
+    <label class="form__label" for="message">Сообщение</label>
+    <textarea class="form__textarea" id="message" name="message" rows="4" required></textarea>
+   </div>
    
-   <div class="form-actions">
-    <button type="button" id="closeDialog">Закрыть</button>
-    <button type="submit">Отправить</button>
+   <div class="form__actions">
+    <button type="button" id="closeDialog" class="btn btn--secondary">Закрыть</button>
+    <button type="submit" class="btn btn--primary">Отправить</button>
    </div>
   </form>
  </dialog>
  
  <script src="main.js"></script>
+ 
+ <script>
+  // Переключатель темы
+  const KEY = 'theme';
+  const btn = document.querySelector('.theme-toggle');
+  const prefersDark = matchMedia('(prefers-color-scheme: dark)').matches;
+  
+  // Автовыбор: системная тема или сохранённый выбор пользователя
+  if (localStorage.getItem(KEY) === 'dark' || (!localStorage.getItem(KEY) && prefersDark)) {
+   document.body.classList.add('theme-dark');
+   btn?.setAttribute('aria-pressed', 'true');
+   btn.textContent = '☀️';
+  }
+  
+  // Переключение по кнопке с сохранением в localStorage
+  btn?.addEventListener('click', () => {
+   const isDark = document.body.classList.toggle('theme-dark');
+   btn.setAttribute('aria-pressed', String(isDark));
+   btn.textContent = isDark ? '☀️' : '🌙';
+   localStorage.setItem(KEY, isDark ? 'dark' : 'light');
+  });
+ </script>
 </body>
 </html>
